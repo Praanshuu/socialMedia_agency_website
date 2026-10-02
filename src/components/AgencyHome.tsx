@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Facebook,
   Instagram,
+  MapPin,
   Menu,
   Play,
   Sparkles,
@@ -86,7 +87,7 @@ function Header() {
   const [open, setOpen] = useState(false);
   const links = [["Services", "#services"], ["Platforms", "#platforms"], ["Packages", "#packages"], ["Results", "#results"], ["Reviews", "#reviews"], ["FAQ", "#faq"]];
   return <header className="site-header"><div className="nav-wrap">
-    <a href="#top" className="brand" aria-label="Your Brand home"><span className="brand-mark">YB</span><span>Your Brand</span></a>
+    <a href="#top" className="brand" aria-label="Nexora Elite Media home"><span className="brand-mark">NE</span><span>Nexora Elite Media</span></a>
     <nav className="desktop-nav" aria-label="Primary navigation">{links.map(([label, href]) => <a key={href} href={href}>{label}</a>)}</nav>
     <a href="#contact" className="nav-cta">Start Growing <ArrowRight size={14}/></a>
     <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label={open ? "Close menu" : "Open menu"}>{open ? <X/> : <Menu/>}</button>
@@ -241,12 +242,12 @@ export function AgencyHome() {
 
     <section id="opportunities" className="opportunity-section"><div className="section-shell opportunity-container"><SectionHeading label="08 / Monetization & brand opportunities" title="Turn Your Social Presence Into Opportunities" copy="We help you identify available monetization opportunities across supported platforms and assist with the required setup where applicable."/><div className="opportunity-grid">{opportunities.map(([t,d],i) => <article className="opportunity reveal" key={t}><div className="opportunity-icon">{i===0?<BarChart3 size={20}/>:i===1?<Sparkles size={20}/>:i===2?<Target size={20}/>:<TrendingUp size={20}/>}</div><div className="opportunity-body"><h3>{t}</h3><p>{d}</p></div></article>)}</div></div></section>
 
-    <section id="contact" className="contact-section"><div className="section-shell content-section contact-layout"><div><p className="eyebrow">09 / Get started</p><h2>Ready to Grow Your Social Media?</h2><p>Choose your package and start your social media promotion journey today.</p><div className="contact-points"><span><Users/> Tailored growth strategy</span><span><Zap/> Structured promotion</span><span><BarChart3/> Clear campaign insights</span></div></div><ContactForm/></div></section>
+    <section id="contact" className="contact-section"><div className="section-shell content-section contact-layout"><div><p className="eyebrow">09 / Get started</p><h2>Ready to Grow Your Social Media?</h2><p>Choose your package and start your social media promotion journey with Nexora Elite Media today.</p><div className="contact-points"><span><Users/> Tailored growth strategy</span><span><Zap/> Structured promotion</span><span><BarChart3/> Clear campaign insights</span><span className="contact-address"><MapPin/> 1001 S Main St, Ste 500, Kalispell, MT 59901-1498</span></div></div><ContactForm/></div></section>
 
     <section id="faq" className="section-shell content-section faq-layout"><SectionHeading label="10 / FAQ" title="Frequently Asked Questions"/><div className="faq-list">{faqs.map(([q,a],i) => <FAQItem key={q} question={q} answer={a} index={i}/>)}</div></section>
   </main><Footer/></>;
 }
 
 function Footer() {
-  return <footer className="footer"><div className="section-shell"><div className="footer-top"><div><a href="#top" className="brand brand-footer"><span className="brand-mark">YB</span><span>Your Brand Logo</span></a><p>Social Media Growth & Promotion</p></div><div><h3>Quick Links</h3><nav><a href="#top">Home</a><a href="#services">Services</a><a href="#platforms">Platforms</a><a href="#packages">Packages</a><a href="#results">Results</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav></div><div><h3>Legal</h3><nav><span>Terms & Conditions</span><span>Privacy Policy</span><span>Refund Policy</span></nav></div></div><div className="footer-bottom"><span>© 2026 Your Brand. All Rights Reserved.</span><span>Built for meaningful growth.</span></div></div></footer>;
+  return <footer className="footer"><div className="section-shell"><div className="footer-top"><div><a href="#top" className="brand brand-footer"><span className="brand-mark">NE</span><span>Nexora Elite Media</span></a><p>Social Media Growth & Strategic Promotion</p><address className="footer-address"><MapPin size={15}/><span>1001 S MAIN ST, STE 500<br/>KALISPELL, MT 59901-1498</span></address></div><div><h3>Quick Links</h3><nav><a href="#top">Home</a><a href="#services">Services</a><a href="#platforms">Platforms</a><a href="#packages">Packages</a><a href="#results">Results</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav></div><div><h3>Legal</h3><nav><span>Terms & Conditions</span><span>Privacy Policy</span><span>Refund Policy</span></nav></div></div><div className="footer-bottom"><span>© 2026 Nexora Elite Media LLC. All Rights Reserved.</span><span>Built for meaningful growth.</span></div></div></footer>;
 }
