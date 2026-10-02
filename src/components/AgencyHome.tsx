@@ -55,15 +55,6 @@ const packages = [
   { name: "DIAMOND", price: "$399", target: "Growth Target: Up to 50K", tone: "diamond", features: ["Permanent Posts", "Daily Stories", "Highlights", "Bio Mention", "Reels Promotion", "Follow Back", "VIP Premium Benefits", "Star ⭐ for 6 Weeks"] },
 ] as const;
 
-const reasons = [
-  ["Large Audience Network", "Access to a 20M+ high-growth audience network."],
-  ["Multi-Platform Promotion", "Solutions for Instagram, YouTube, TikTok, Facebook and other social platforms."],
-  ["Customized Strategy", "Your campaign is planned according to your profile and growth objectives."],
-  ["Growth-Focused Approach", "Focus on visibility, audience exposure and building your social media presence."],
-  ["Professional Profile Positioning", "Improve your profile presentation, bio and content positioning."],
-  ["Structured Promotion", "A clear promotional process designed around your selected package."],
-] as const;
-
 const opportunities = [
   ["Platform Monetization", "Explore available monetization opportunities on supported platforms."],
   ["Brand Collaborations", "Professionally position your profile for potential brand partnerships."],
@@ -120,6 +111,82 @@ function FAQItem({ question, answer, index }: { question: string; answer: string
   return <div className="faq-item"><button aria-expanded={open} onClick={() => setOpen(!open)}><span>{question}</span><ChevronDown className={open ? "rotate" : ""}/></button>{open && <div className="faq-answer"><p>{answer}</p></div>}</div>;
 }
 
+const reviews = [
+  {
+    quote: "Our channel went from struggling to get 500 impressions to consistently reaching tens of thousands of real viewers every week. The audience growth was steady, targeted and authentic.",
+    author: "Marcus Vance",
+    role: "Tech & Gaming Creator",
+    platform: "YouTube / USA",
+    initials: "MV",
+    stars: 5,
+  },
+  {
+    quote: "The Gold package delivered way beyond our expectations. Our Instagram profile gained over 28,000 active followers and our reels engagement spiked by 400% in a single month.",
+    author: "Elena Rostova",
+    role: "Fashion & Lifestyle",
+    platform: "Instagram / UK",
+    initials: "ER",
+    stars: 5,
+  },
+  {
+    quote: "As an emerging fitness brand, building initial authority was our biggest challenge. Their strategic promotion gave us the credibility needed to secure major brand sponsorships.",
+    author: "David Chen",
+    role: "Fitness Coach & Founder",
+    platform: "TikTok / Canada",
+    initials: "DC",
+    stars: 5,
+  },
+  {
+    quote: "Seamless process and crystal clear campaign transparency. Promotional placements went live within 24 hours, driving genuine audience interaction and verified reach.",
+    author: "Sophia Al-Mansoor",
+    role: "Digital Entrepreneur",
+    platform: "Multi-Platform / UAE",
+    initials: "SA",
+    stars: 5,
+  },
+] as const;
+
+function TestimonialCarousel() {
+  const [index, setIndex] = useState(0);
+  const prev = () => setIndex((curr) => (curr === 0 ? reviews.length - 1 : curr - 1));
+  const next = () => setIndex((curr) => (curr === reviews.length - 1 ? 0 : curr + 1));
+  const current = reviews[index] ?? reviews[0];
+
+  return (
+    <section id="reviews" className="testimonial-section">
+      <div className="section-shell content-section">
+        <div className="testimonial-header">
+          <SectionHeading label="07 / Client reviews" title="What Our Clients Say" />
+          <div className="carousel-controls">
+            <span className="carousel-counter">{String(index + 1).padStart(2, "0")} / {String(reviews.length).padStart(2, "0")}</span>
+            <div className="carousel-buttons">
+              <button aria-label="Previous review" onClick={prev}>
+                <ChevronLeft size={18} />
+              </button>
+              <button aria-label="Next review" onClick={next}>
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
+        </div>
+        <blockquote className="testimonial" key={index}>
+          <div className="stars" aria-label="5 out of 5 stars">
+            {"★".repeat(current.stars)}
+          </div>
+          <p>“{current.quote}”</p>
+          <footer>
+            <span>{current.initials}</span>
+            <div>
+              <strong>{current.author}</strong>
+              <small>{current.role} • {current.platform}</small>
+            </div>
+          </footer>
+        </blockquote>
+      </div>
+    </section>
+  );
+}
+
 function ContactForm() {
   const [status, setStatus] = useState<"idle"|"loading"|"success">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -170,17 +237,13 @@ export function AgencyHome() {
 
     <section id="results" className="section-shell content-section"><SectionHeading label="06 / Before & after — client proof" title="Real Client Growth" copy="See how our promotional campaigns have helped clients increase their social media exposure and audience growth."/><BeforeAfter/></section>
 
-    <section id="reviews" className="testimonial-section"><div className="section-shell content-section"><div className="testimonial-header"><SectionHeading label="07 / Client reviews" title="What Our Clients Say"/><div className="carousel-buttons"><button aria-label="Previous review"><ChevronLeft/></button><button aria-label="Next review"><ChevronRight/></button></div></div><blockquote className="testimonial reveal"><div className="stars" aria-label="5 out of 5 stars">★★★★★</div><p>“Actual client review goes here.”</p><footer><span>CN</span><div><strong>Client Name</strong><small>Platform / Country</small></div></footer></blockquote></div></section>
+    <TestimonialCarousel/>
 
-    <section className="section-shell content-section"><SectionHeading label="08 / Why choose us" title="Why Clients Choose Us"/><div className="reasons-grid">{reasons.map(([t,d],i) => <article className="reason reveal" key={t}><span>0{i+1}</span><h3>{t}</h3><p>{d}</p></article>)}</div></section>
+    <section id="opportunities" className="opportunity-section"><div className="section-shell opportunity-container"><SectionHeading label="08 / Monetization & brand opportunities" title="Turn Your Social Presence Into Opportunities" copy="We help you identify available monetization opportunities across supported platforms and assist with the required setup where applicable."/><div className="opportunity-grid">{opportunities.map(([t,d],i) => <article className="opportunity reveal" key={t}><div className="opportunity-icon">{i===0?<BarChart3 size={20}/>:i===1?<Sparkles size={20}/>:i===2?<Target size={20}/>:<TrendingUp size={20}/>}</div><div className="opportunity-body"><h3>{t}</h3><p>{d}</p></div></article>)}</div></div></section>
 
-    <section className="opportunity-section"><div className="section-shell content-section"><SectionHeading label="09 / Monetization & brand opportunities" title="Turn Your Social Presence Into Opportunities" copy="We help you identify available monetization opportunities across supported platforms and assist with the required setup where applicable."/><div className="opportunity-grid">{opportunities.map(([t,d],i) => <article className="opportunity reveal" key={t}>{i===0?<BarChart3/>:i===1?<Sparkles/>:i===2?<Target/>:<TrendingUp/>}<h3>{t}</h3><p>{d}</p></article>)}</div></div></section>
+    <section id="contact" className="contact-section"><div className="section-shell content-section contact-layout"><div><p className="eyebrow">09 / Get started</p><h2>Ready to Grow Your Social Media?</h2><p>Choose your package and start your social media promotion journey today.</p><div className="contact-points"><span><Users/> Tailored growth strategy</span><span><Zap/> Structured promotion</span><span><BarChart3/> Clear campaign insights</span></div></div><ContactForm/></div></section>
 
-    <section className="section-shell content-section success-story"><div className="story-heading"><SectionHeading label="10 / Results & success stories" title="Growth You Can See"/></div><div className="story-card reveal"><div className="story-lead"><p>Campaign Results</p><h3>Before <span>→</span> After</h3><a href="#contact">View Full Case Study <ArrowRight size={17}/></a></div><div className="story-metrics"><div><span>Followers</span><strong>2.4K <i>→</i> 8.7K</strong></div><div><span>Reach</span><strong>XX <i>→</i> XX</strong></div><div><span>Engagement</span><strong>XX <i>→</i> XX</strong></div><div><span>Profile Visits</span><strong>XX <i>→</i> XX</strong></div></div></div></section>
-
-    <section id="contact" className="contact-section"><div className="section-shell content-section contact-layout"><div><p className="eyebrow">11 / Get started</p><h2>Ready to Grow Your Social Media?</h2><p>Choose your package and start your social media promotion journey today.</p><div className="contact-points"><span><Users/> Tailored growth strategy</span><span><Zap/> Structured promotion</span><span><BarChart3/> Clear campaign insights</span></div></div><ContactForm/></div></section>
-
-    <section id="faq" className="section-shell content-section faq-layout"><SectionHeading label="12 / FAQ" title="Frequently Asked Questions"/><div className="faq-list">{faqs.map(([q,a],i) => <FAQItem key={q} question={q} answer={a} index={i}/>)}</div></section>
+    <section id="faq" className="section-shell content-section faq-layout"><SectionHeading label="10 / FAQ" title="Frequently Asked Questions"/><div className="faq-list">{faqs.map(([q,a],i) => <FAQItem key={q} question={q} answer={a} index={i}/>)}</div></section>
   </main><Footer/></>;
 }
 
